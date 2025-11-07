@@ -1,0 +1,116 @@
+.certificates-section {
+  background: linear-gradient(135deg, #0f0f1a, #1a1a2e);
+  min-height: 100vh;
+  font-family: 'Poppins', sans-serif;
+  overflow: hidden;
+}
+
+/* Title Animation */
+.cert-title {
+  font-size: 3rem;
+  font-weight: 800;
+  background: linear-gradient(90deg, #8b5cf6, #3b82f6, #06b6d4);
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: glowText 5s ease infinite;
+}
+
+@keyframes glowText {
+  0% { background-position: 0% 50%; filter: drop-shadow(0 0 5px #3b82f6); }
+  50% { background-position: 100% 50%; filter: drop-shadow(0 0 10px #8b5cf6); }
+  100% { background-position: 0% 50%; filter: drop-shadow(0 0 5px #06b6d4); }
+}
+
+.cert-subtitle {
+  color: #b0b0b0;
+  font-size: 1.1rem;
+  letter-spacing: 0.5px;
+}
+
+/* Card Styling */
+.certificate-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 2rem;
+  border-radius: 15px;
+  background: rgba(30, 30, 60, 0.6);
+  border: 2px solid transparent;
+  background-clip: padding-box;
+  position: relative;
+  animation: borderGlow 5s linear infinite;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.certificate-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 25px rgba(139, 92, 246, 0.6);
+}
+
+@keyframes borderGlow {
+  0% {
+    border-color: #3b82f6;
+    box-shadow: 0 0 10px rgba(59, 130, 246, 0.3);
+  }
+  50% {
+    border-color: #8b5cf6;
+    box-shadow: 0 0 20px rgba(139, 92, 246, 0.5);
+  }
+  100% {
+    border-color: #06b6d4;
+    box-shadow: 0 0 10px rgba(6, 182, 212, 0.3);
+  }
+}
+
+/* Image Floating Animation */
+.image-box {
+  width: 100%;
+  text-align: center;
+}
+
+.cert-image {
+  width: 80%;
+  max-width: 450px;
+  border-radius: 10px;
+  box-shadow: 0 0 25px rgba(139, 92, 246, 0.3);
+  animation: floatImage 4s ease-in-out infinite;
+}
+
+@keyframes floatImage {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}
+
+/* Content and Icons */
+.cert-content {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.icon-box svg {
+  color: #8b5cf6;
+  animation: pulseIcon 3s ease-in-out infinite;
+}
+
+@keyframes pulseIcon {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.15); opacity: 0.8; }
+}
+
+.cert-heading {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 5px;
+  text-align: center;
+}
+
+.cert-text {
+  color: #a0a0a0;
+  font-size: 0.95rem;
+  text-align: center;
+}

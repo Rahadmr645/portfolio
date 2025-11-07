@@ -1,0 +1,76 @@
+.about-section {
+  background-color: #0b0f19;
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+/* --- HEADING --- */
+.gradient-text {
+  background: linear-gradient(90deg, #6a5af9, #00ffff, #ff00ff);
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientFlow 5s ease infinite;
+}
+
+@keyframes gradientFlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* --- MAIN ABOUT BOX --- */
+.about-box {
+  max-width: 950px;
+  background: rgba(20, 25, 45, 0.9);
+  box-shadow: 0 0 40px rgba(0, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* --- TEXT --- */
+.about-desc {
+  color: #ccc;
+  font-size: 1.1rem;
+  line-height: 1.7;
+}
+
+.highlight {
+  color: #00ffff;
+  font-weight: 600;
+}
+
+/* --- ICON CARDS --- */
+.about-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: all 0.3s ease;
+}
+
+.about-card:hover {
+  background: rgba(255, 255, 255, 0.07);
+  transform: translateY(-5px);
+}
+
+/* --- ICON CIRCLE --- */
+.icon-circle {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: radial-gradient(circle at top left, #1f2b50, #0e162e);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #00ffff;
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 768px) {
+  .about-desc {
+    font-size: 1rem;
+  }
+  .about-card h5 {
+    font-size: 1rem;
+  }
+}

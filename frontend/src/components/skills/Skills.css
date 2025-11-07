@@ -1,0 +1,84 @@
+.skills-section {
+  background-color: #0d0d0d;
+  color: #fff;
+  min-height: 100vh;
+  overflow: hidden;
+  padding: 100px;
+}
+
+/* Animated Gradient Text */
+.gradient-text {
+  background: linear-gradient(270deg, #00ffcc, #ff00ff, #ffaa00, #00ffcc);
+  background-size: 800% 800%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientMove 6s ease infinite;
+}
+
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Tech Cards */
+.tech-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  padding: 25px;
+  transition: all 0.4s ease;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+}
+
+.tech-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 0 25px rgba(99, 102, 241, 0.8);
+  background: rgba(99, 102, 241, 0.08);
+}
+
+.tech-icon {
+  width: 60px;
+  height: 60px;
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Floating animation */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+
+/* Languages Box */
+.languages-box {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  padding: 40px 20px;
+  width: 80%;
+  max-width: 900px;
+  box-shadow: 0 0 20px rgba(99, 102, 241, 0.2);
+  transition: all 0.4s ease;
+}
+
+.languages-box:hover {
+  box-shadow: 0 0 30px rgba(99, 102, 241, 0.4);
+  transform: translateY(-5px);
+}
+
+/* Language badges */
+.lang-badge {
+  background: rgba(91, 30, 230, 0.15);
+  color: #fff;
+  border-radius: 30px;
+  padding: 10px 25px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px rgba(91, 30, 230, 0.3);
+}
+
+.lang-badge:hover {
+  background: #8c52ff;
+  transform: scale(1.1);
+  box-shadow: 0 0 20px rgba(140, 82, 255, 0.8);
+}

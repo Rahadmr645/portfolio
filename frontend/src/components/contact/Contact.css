@@ -1,0 +1,88 @@
+.contact-section {
+  background: linear-gradient(135deg, #0f172a, #1e293b);
+}
+
+.gradient-text {
+  background: linear-gradient(90deg, #3b82f6, #a855f7);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.contact-card,
+.info-card {
+  background: rgba(30, 41, 59, 0.9);
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
+}
+
+.contact-card:hover,
+.info-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 25px rgba(99, 102, 241, 0.4);
+}
+
+.contact-input {
+  background-color: #1e293b;
+  border: 1px solid #334155;
+  color: #f1f5f9;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+.contact-input:focus {
+  border-color: #6366f1;
+  box-shadow: 0 0 10px rgba(99, 102, 241, 0.3);
+  outline: none;
+}
+
+.btn-gradient {
+  background: linear-gradient(90deg, #3b82f6, #9333ea);
+  border: none;
+  color: white;
+  transition: 0.4s;
+}
+
+.btn-gradient:hover {
+  background: linear-gradient(90deg, #2563eb, #7e22ce);
+  transform: scale(1.03);
+}
+
+.status-msg {
+  color: #22c55e;
+  font-weight: 500;
+}
+
+.social-link {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background: #1e293b;
+  color: #e2e8f0;
+  transition: all 0.3s ease;
+}
+
+.social-link:hover {
+  background: #6366f1;
+  color: #fff;
+  transform: scale(1.1);
+}
+
+.copy-btn {
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.float-card {
+  animation: float 4s ease-in-out infinite;
+}
+
+.float-card:nth-child(2) {
+  animation-delay: 2s;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
