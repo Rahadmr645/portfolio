@@ -123,7 +123,7 @@ const Contact = () => {
               <button
                 className="copy-btn text-info border-0 bg-transparent"
                 onClick={() => {
-                  navigator.clipboard.writeText("rahad@example.com");
+                  navigator.clipboard.writeText("rahadmr645@gmail.com");
                   setSubmissionStatus("Email copied to clipboard!");
                   setTimeout(() => setSubmissionStatus(""), 3000);
                 }}
