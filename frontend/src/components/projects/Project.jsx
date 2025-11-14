@@ -1,46 +1,41 @@
 import React from "react";
 import { FaExternalLinkAlt } from "react-icons/fa";
 import "./Project.css";
+import projectsData from "./projectData.js";
 
 const Project = () => {
   return (
     <section className="projects" id="projects">
-      <h2 className="projects-title">Featured Project</h2>
+      <h2 className="projects-title">Featured Projects</h2>
 
-      <div className="project-card">
-        <div className="project-image">
-          <img
-            src="/images/tabletab-preview.png"
-            alt="TableTab Project"
-          />
-        </div>
-
-        <div className="project-content">
-          <h3 className="project-name">TableTab Dashboard</h3>
-          <p className="project-description">
-            A full-stack MERN application for cafe order management with real-time updates, 
-            live analytics, and socket-based communication between staff and kitchen.
-          </p>
-
-          <div className="project-tags">
-            <span>MongoDB</span>
-            <span>Express</span>
-            <span>React</span>
-            <span>Node.js</span>
-            <span>Socket.io</span>
-            <span>JWT</span>
+      {projectsData.map((project) => (
+        <div key={project.id} className="project-card">
+          <div className="project-image">
+            <img src={project.image} alt={project.name} />
           </div>
 
-          <a
-            href="https://table-tab-client.vercel.app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="project-link"
-          >
-            View Project <FaExternalLinkAlt className="icon" />
-          </a>
+          <div className="project-content">
+            <h3 className="project-name">{project.name}</h3>
+
+            <p className="project-description">{project.description}</p>
+
+            <div className="project-tags">
+              {project.tags.map((tag, index) => (
+                <span key={index}>{tag}</span>
+              ))}
+            </div>
+
+            <a
+              href={project.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="project-link"
+            >
+              View Project <FaExternalLinkAlt className="icon" />
+            </a>
+          </div>
         </div>
-      </div>
+      ))}
     </section>
   );
 };

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { Mail, Github, Linkedin, Twitter, Send } from "lucide-react";
+import { Mail, Github, Linkedin, Send} from "lucide-react";
 import "./Contact.css";
-
+import { SiUpwork } from "react-icons/si";
 const Contact = () => {
   const [formData, setFormData] = useState({
     name: "",
@@ -108,9 +108,9 @@ const Contact = () => {
                 I'm open to new projects, ideas, or collaborations.
               </p>
               <div className="d-flex gap-3 justify-content-center">
-                <SocialLink Icon={Linkedin} href="#" />
+                <SocialLink Icon={Linkedin} href="https://www.linkedin.com/in/md-rahad-patwary-4b326a237?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" />
                 <SocialLink Icon={Github} href="https://github.com/Rahadmr645" />
-                <SocialLink Icon={Twitter} href="#" />
+                <SocialLink Icon={SiUpwork} href="https://www.upwork.com/freelancers/~018825ac66df4d612c" />
               </div>
             </div>
 
