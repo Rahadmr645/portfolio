@@ -29,6 +29,26 @@ const projectsData = [
   ],
   link: "https://ironmind-rahad.vercel.app" // give your real link
 }
+,
+{
+  id: 3,
+  name: "RChat Sentinel",
+  description:
+    "RChat Protocol is a full-featured social messaging application designed to handle complex user interactions in real-time. By leveraging WebRTC for high-quality voice and video calls and MongoDB for scalable data storage, the application provides a fluid user experience. I implemented a security-centric architecture where all messages are stored in hashed formats, protecting user conversations against unauthorized database access while maintaining fast search and retrieval.",
+  image: rchat, 
+  tags: [
+    "React",
+    "Node.js",
+    "Express",
+    "MongoDB",
+    "JWT",
+    "Socket.io",
+    "Context API",
+    "CryptoJS",
+    "WebRTC"
+  ],
+  link: "https://chat-ashen-five-27.vercel.app/" // give your real link
+}
 
 ];
 
