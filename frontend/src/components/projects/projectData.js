@@ -1,6 +1,7 @@
 
 import tabletab from '../../assets/tabletab.png'
 import ironmind from '../../assets/ironmind.png'
+import rchat from '../../assets/rchat.png'
 const projectsData = [
   {
     id: 1,
