@@ -1,72 +1,191 @@
-.ai-journey {
-  background: linear-gradient(135deg, #0f172a, #1e293b);
-  overflow: hidden;
-}
-
-.ai-card {
-  background: rgba(30, 41, 59, 0.8);
-  border: 1px solid rgba(148, 163, 184, 0.2);
-  backdrop-filter: blur(10px);
+.ai-journey-section {
+  min-height: 100vh;
   position: relative;
-  animation: fadeInUp 1s ease-out;
-  border-radius: 10px;
+  overflow: hidden;
+  z-index: 1;
+  background: transparent;
+  display: flex;
+  align-items: center;
+}
+
+.ai-glow-orb {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(157, 78, 221, 0.03) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: -1;
+  filter: blur(50px);
+}
+
+/* --- TIMELINE CONTAINER --- */
+.timeline-container {
+  max-width: 1000px;
+}
+
+/* Vertical line */
+.timeline-line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  background: linear-gradient(180deg, var(--accent-cyan) 0%, var(--accent-purple) 50%, var(--border-glass) 100%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* --- TIMELINE NODES --- */
+.timeline-node-container {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+}
+
+.timeline-node {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--bg-obsidian);
+  border: 2px solid var(--border-glass);
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition-smooth);
+}
+
+.timeline-node.completed {
+  border-color: var(--accent-cyan);
+  color: var(--accent-cyan);
+  box-shadow: 0 0 15px rgba(0, 242, 254, 0.3);
+}
+
+.timeline-node.current {
+  border-color: #ffb703;
+  color: #ffb703;
+  box-shadow: 0 0 20px rgba(255, 183, 3, 0.4);
+  animation: nodePulse 2s infinite;
+}
+
+.timeline-node.future {
+  border-color: var(--border-glass);
+  color: var(--text-muted);
+}
+
+@keyframes nodePulse {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 15px rgba(255, 183, 3, 0.4); }
+  50% { transform: scale(1.1); box-shadow: 0 0 25px rgba(255, 183, 3, 0.7); }
+}
+
+/* --- TIMELINE CONTENT CARDS --- */
+.timeline-content-card {
+  border-radius: 20px !important;
+  transition: var(--transition-smooth) !important;
+}
+
+.timeline-content-card:hover {
+  border-color: var(--accent-purple) !important;
+  transform: translateY(-5px);
+}
+
+.timeline-content-card.active-milestone {
+  border-color: #ffb703 !important;
+  box-shadow: 0 8px 30px rgba(255, 183, 3, 0.1) !important;
+}
+
+/* Milestone Status Badge */
+.milestone-badge {
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-weight: 600;
+}
+
+.milestone-badge.completed {
+  background: rgba(0, 242, 254, 0.08);
+  border: 1px solid rgba(0, 242, 254, 0.2);
+  color: var(--accent-cyan);
+}
+
+.milestone-badge.current {
+  background: rgba(255, 183, 3, 0.08);
+  border: 1px solid rgba(255, 183, 3, 0.2);
+  color: #ffb703;
+}
+
+.milestone-badge.future {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-glass);
+  color: var(--text-muted);
+}
+
+/* Skill Tags */
+.milestone-skill-tag {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-glass);
+  color: var(--text-secondary);
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 0.76rem;
+  font-weight: 500;
+  font-family: var(--font-mono);
+  transition: var(--transition-fast);
+}
+
+.timeline-content-card:hover .milestone-skill-tag {
+  border-color: var(--accent-purple);
+  color: var(--text-primary);
+}
+
+.timeline-content-card.active-milestone:hover .milestone-skill-tag {
+  border-color: #ffb703;
+}
+
+.animate-spin-slow {
+  animation: spin 6s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* --- MOBILE RESPONSIVE TIMELINE COLLAPSE --- */
+@media (max-width: 768px) {
+  .timeline-line {
+    left: 20px;
+    transform: none;
+  }
   
-}
-
-.gradient-title {
-  background: linear-gradient(90deg, #a78bfa, #3b82f6);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.icon-float {
-  animation: floatUpDown 3s ease-in-out infinite;
-}
-
-@keyframes floatUpDown {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
-}
-
-.feature-card {
-  transition: all 0.4s ease;
-  border: none;
-  border-radius: 10px;
-}
-
-.float-box {
-  animation: floatBox 4s ease-in-out infinite;
-  box-shadow: 0 0 20px rgba(99, 102, 241, 0.1);
-}
-
-.float-box:nth-child(1) { animation-delay: 0s; }
-.float-box:nth-child(2) { animation-delay: 1s; }
-.float-box:nth-child(3) { animation-delay: 2s; }
-
-@keyframes floatBox {
-  0%, 100% {
-    transform: translateY(0);
-    box-shadow: 0 0 20px rgba(99, 102, 241, 0.1);
+  .timeline-item {
+    flex-direction: row !important; /* Force all to align to the right of node */
+    margin-bottom: 2.5rem !important;
   }
-  50% {
-    transform: translateY(-12px);
-    box-shadow: 0 0 25px rgba(99, 102, 241, 0.3);
+  
+  .timeline-content-wrapper {
+    padding-left: 55px !important;
+    width: 100% !important;
   }
-}
-
-.feature-card:hover {
-  transform: scale(1.05);
-  background: rgba(99, 102, 241, 0.25);
-  box-shadow: 0 10px 25px rgba(99, 102, 241, 0.5);
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(40px);
+  
+  .timeline-node-container {
+    left: 20px;
+    transform: translateX(-50%);
+    display: flex !important; /* Ensure node displays on mobile */
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+  
+  .timeline-node {
+    width: 32px;
+    height: 32px;
+  }
+  
+  .timeline-node svg {
+    width: 14px;
+    height: 14px;
   }
 }

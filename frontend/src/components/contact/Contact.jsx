@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { Mail, Github, Linkedin, Send} from "lucide-react";
-import "./Contact.css";
+import { Mail, Github, Linkedin, Send, Copy, Check } from "lucide-react";
 import { SiUpwork } from "react-icons/si";
+import "./Contact.css";
+
 const Contact = () => {
   const [formData, setFormData] = useState({
     name: "",
@@ -9,18 +10,46 @@ const Contact = () => {
     message: "",
   });
   const [submissionStatus, setSubmissionStatus] = useState("");
+  const [copied, setCopied] = useState(false);
 
   const handleChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setSubmissionStatus("Sending...");
-    setTimeout(() => {
-      setFormData({ name: "", email: "", message: "" });
-      setSubmissionStatus("Message sent successfully!");
-      setTimeout(() => setSubmissionStatus(""), 3000);
-    }, 1500);
+    
+    try {
+      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000/api/contact';
+      const response = await fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setFormData({ name: "", email: "", message: "" });
+        setSubmissionStatus("success");
+      } else {
+        setSubmissionStatus(data.message || "Failed to send message.");
+      }
+    } catch (error) {
+      console.error("Submission error:", error);
+      setSubmissionStatus("Network error. Make sure the backend server is running.");
+    }
+    
+    // Reset status after a few seconds
+    setTimeout(() => setSubmissionStatus(""), 4000);
+  };
+
+  const handleCopyEmail = () => {
+    navigator.clipboard.writeText("rahadmr645@gmail.com");
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2500);
   };
 
   const SocialLink = ({ Icon, href }) => (
@@ -30,107 +59,137 @@ const Contact = () => {
       rel="noopener noreferrer"
       className="social-link d-inline-flex align-items-center justify-content-center"
     >
-      <Icon size={22} />
+      <Icon size={20} />
     </a>
   );
 
   return (
-    <div className="contact-section text-light d-flex flex-column justify-content-center align-items-center min-vh-100">
+    <div className="contact-section text-light d-flex flex-column justify-content-center align-items-center min-vh-100" id="contact">
       <div className="container py-5">
-        <h1 className="gradient-text text-center fw-bold mb-5">
-          Get In Touch
-        </h1>
+        
+        {/* Glow backdrop ornament */}
+        <div className="contact-glow-orb"></div>
+
+        <div className="text-center mb-5">
+          <h2 className="gradient-text fw-bold display-5">Get In Touch</h2>
+          <p className="text-secondary mt-2">Have a project in mind or want to collaborate? Drop me a line.</p>
+        </div>
+
         <div className="row g-4 justify-content-center">
+          
+          {/* Form Card */}
           <div className="col-lg-7">
-            <div className="contact-card p-5 rounded-4 shadow-lg">
+            <div className="contact-card p-4 p-md-5 glass-card">
               <form onSubmit={handleSubmit}>
-                <div className="mb-3">
+                <div className="form-group-custom mb-4">
                   <input
                     type="text"
                     name="name"
-                    placeholder="Your Name"
-                    className="form-control contact-input"
+                    id="name"
+                    required
+                    className="form-control-custom"
                     value={formData.name}
                     onChange={handleChange}
-                    required
                   />
+                  <label htmlFor="name" className="form-label-custom">Your Name</label>
                 </div>
-                <div className="mb-3">
+
+                <div className="form-group-custom mb-4">
                   <input
                     type="email"
                     name="email"
-                    placeholder="Your Email"
-                    className="form-control contact-input"
+                    id="email"
+                    required
+                    className="form-control-custom"
                     value={formData.email}
                     onChange={handleChange}
-                    required
                   />
+                  <label htmlFor="email" className="form-label-custom">Your Email</label>
                 </div>
-                <div className="mb-3">
+
+                <div className="form-group-custom mb-5">
                   <textarea
                     name="message"
-                    placeholder="Your Message"
+                    id="message"
+                    required
                     rows="4"
-                    className="form-control contact-input"
+                    className="form-control-custom textarea-custom"
                     value={formData.message}
                     onChange={handleChange}
-                    required
                   ></textarea>
+                  <label htmlFor="message" className="form-label-custom">Your Message</label>
                 </div>
+
                 <button
                   type="submit"
-                  className="btn btn-gradient w-100 py-3 fw-bold"
+                  className="btn btn-submit-glow w-100 py-3 fw-bold d-flex align-items-center justify-content-center"
                   disabled={submissionStatus === "Sending..."}
                 >
                   {submissionStatus === "Sending..." ? (
-                    <span className="spinner-border spinner-border-sm me-2"></span>
+                    <>
+                      <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                      Transmitting...
+                    </>
                   ) : (
-                    <Send className="me-2" size={18} />
+                    <>
+                      Send Message <Send className="ms-2" size={16} />
+                    </>
                   )}
-                  {submissionStatus === "Sending..."
-                    ? "Sending..."
-                    : "Send Message"}
                 </button>
 
-                {submissionStatus && (
-                  <div className="status-msg text-center mt-3">
-                    {submissionStatus}
+                {/* Display Success / Error Alerts */}
+                {submissionStatus && submissionStatus !== "Sending..." && (
+                  <div className={`status-msg-box mt-4 text-center p-3 rounded-3 ${submissionStatus === "success" ? "status-success" : "status-error"}`}>
+                    {submissionStatus === "success" 
+                      ? "Transmission successful. Message saved in database. I will get back to you shortly." 
+                      : submissionStatus
+                    }
                   </div>
                 )}
               </form>
             </div>
           </div>
 
-          <div className="col-lg-4">
-            <div className="info-card p-4 rounded-4 shadow float-card mb-4">
-              <h4 className="fw-semibold mb-3">Connect With Me</h4>
-              <p className="text-secondary mb-4">
-                I'm open to new projects, ideas, or collaborations.
+          {/* Info Cards */}
+          <div className="col-lg-4 d-flex flex-column gap-4">
+            
+            {/* Connect Card */}
+            <div className="info-card p-4 glass-card d-flex flex-column align-items-center text-center">
+              <h4 className="fw-bold mb-3 text-white">Connect With Me</h4>
+              <p className="text-secondary mb-4 small" style={{ lineHeight: '1.6' }}>
+                I am open to contract roles, full-time positions, and interesting AI/MERN collaborations.
               </p>
-              <div className="d-flex gap-3 justify-content-center">
-                <SocialLink Icon={Linkedin} href="https://www.linkedin.com/in/md-rahad-patwary-4b326a237?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" />
+              <div className="d-flex gap-3 justify-content-center w-100">
+                <SocialLink Icon={Linkedin} href="https://www.linkedin.com/in/md-rahad-patwary-4b326a237" />
                 <SocialLink Icon={Github} href="https://github.com/Rahadmr645" />
                 <SocialLink Icon={SiUpwork} href="https://www.upwork.com/freelancers/~018825ac66df4d612c" />
               </div>
             </div>
 
-            <div className="info-card p-4 rounded-4 shadow float-card">
-              <h6 className="text-uppercase text-info mb-2">Direct Email</h6>
-              <div className="d-flex align-items-center mb-2">
-                <Mail className="me-2 text-info" size={22} />
-                <span className="fw-semibold">rahadmr645@gmail.com</span>
+            {/* Direct Email Card */}
+            <div className="info-card p-4 glass-card d-flex flex-column align-items-center text-center">
+              <h6 className="text-uppercase text-info tracking-wider mb-3 font-mono small">Direct Channel</h6>
+              <div className="email-icon-box mb-2">
+                <Mail className="text-info" size={24} />
               </div>
+              <span className="fw-semibold text-white mb-3 small">rahadmr645@gmail.com</span>
+              
               <button
-                className="copy-btn text-info border-0 bg-transparent"
-                onClick={() => {
-                  navigator.clipboard.writeText("rahadmr645@gmail.com");
-                  setSubmissionStatus("Email copied to clipboard!");
-                  setTimeout(() => setSubmissionStatus(""), 3000);
-                }}
+                className="copy-email-btn d-flex align-items-center gap-2"
+                onClick={handleCopyEmail}
               >
-                (Click to Copy)
+                {copied ? (
+                  <>
+                    <Check size={14} /> Copied!
+                  </>
+                ) : (
+                  <>
+                    <Copy size={14} /> Copy Address
+                  </>
+                )}
               </button>
             </div>
+
           </div>
         </div>
       </div>

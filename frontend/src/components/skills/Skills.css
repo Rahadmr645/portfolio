@@ -1,91 +1,119 @@
 .skills-section {
-  background-color: #0d0d0d;
-  color: #fff;
   min-height: 100vh;
+  position: relative;
   overflow: hidden;
-  padding: 100px;
+  z-index: 1;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-/* Animated Gradient Text */
-.gradient-text {
-  background: linear-gradient(270deg, #00ffcc, #ff00ff, #ffaa00, #00ffcc);
-  background-size: 800% 800%;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: gradientMove 6s ease infinite;
+.skills-glow-orb {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(0, 242, 254, 0.05) 0%, rgba(157, 78, 221, 0.02) 60%, transparent 100%);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: -1;
+  filter: blur(60px);
 }
 
-@keyframes gradientMove {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-/* Tech Cards */
+/* --- TECH CARDS --- */
 .tech-card {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 15px;
-  padding: 25px;
-  transition: all 0.4s ease;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+  height: 160px;
+  border-radius: 20px !important;
+  transition: var(--transition-smooth) !important;
+  cursor: pointer;
 }
 
-.tech-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 0 25px rgba(99, 102, 241, 0.8);
-  background: rgba(99, 102, 241, 0.08);
+.tech-icon-container {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition-smooth);
 }
 
 .tech-icon {
-  width: 60px;
-  height: 60px;
-  animation: float 3s ease-in-out infinite;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
 }
 
-/* Floating animation */
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-8px); }
-}
-
-/* Languages Box */
-.languages-box {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 15px;
-  padding: 40px 20px;
-  width: 80%;
-  max-width: 900px;
-  box-shadow: 0 0 20px rgba(99, 102, 241, 0.2);
-  transition: all 0.4s ease;
-}
-
-.languages-box:hover {
-  box-shadow: 0 0 30px rgba(99, 102, 241, 0.4);
-  transform: translateY(-5px);
-}
-
-/* Language badges */
-.lang-badge {
-  background: rgba(91, 30, 230, 0.15);
-  color: #fff;
-  border-radius: 30px;
-  padding: 10px 25px;
+.tech-name {
+  font-size: 1.1rem;
   font-weight: 500;
-  transition: all 0.3s ease;
-  box-shadow: 0 0 10px rgba(91, 30, 230, 0.3);
+  color: var(--text-secondary);
+  transition: var(--transition-smooth);
+}
+
+/* --- THE BRAND GLOW EFFECT --- */
+.tech-card:hover {
+  transform: translateY(-8px) scale(1.03);
+  border-color: var(--tech-glow) !important;
+  box-shadow: 0 10px 30px var(--tech-glow), 0 0 15px var(--tech-glow) !important;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.tech-card:hover .tech-icon-container {
+  transform: scale(1.15) rotate(5deg);
+}
+
+.tech-card:hover .tech-name {
+  color: var(--text-primary);
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
+}
+
+/* --- LANGUAGES --- */
+.languages-box {
+  border-radius: 20px !important;
+  border: 1px solid var(--border-glass) !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2) !important;
+}
+
+.lang-badge {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-glass);
+  padding: 10px 22px;
+  border-radius: 30px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  transition: var(--transition-smooth);
+  cursor: default;
 }
 
 .lang-badge:hover {
-  background: #8c52ff;
-  transform: scale(1.1);
-  box-shadow: 0 0 20px rgba(140, 82, 255, 0.8);
+  background: rgba(0, 242, 254, 0.06);
+  border-color: var(--accent-cyan);
+  color: var(--accent-cyan);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 242, 254, 0.15);
 }
 
-
-@media (max-width : 600px) {
-  .skills-section {
-    padding: 10px;
+/* --- RESPONSIVE --- */
+@media (max-width: 576px) {
+  .tech-card {
+    height: 140px;
+  }
+  
+  .tech-icon-container {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .tech-name {
+    font-size: 0.95rem;
+  }
+  
+  .lang-badge {
+    padding: 8px 16px;
+    font-size: 0.85rem;
   }
 }

@@ -1,96 +1,189 @@
 .hero {
-    min-height: 100vh;
-    background: linear-gradient(135deg, #0a0f24 0%, #1b2a4e 100%) !important;
-    position: relative;
-    overflow: hidden;
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
 }
 
-.hero::before {
-    content: "";
-    position: absolute;
-    top: -100px;
-    left: -100px;
-    right: -100px;
-    bottom: -100px;
-    background: inherit;
-    filter: blur(80px);
-    z-index: 0;
+/* --- PROFILE IMAGE WITH SPINNING GRADIENT BORDER --- */
+.profile-img-container {
+  position: relative;
+  width: 190px;
+  height: 190px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.hero .container {
-    position: relative;
-    z-index: 2;
+.gradient-ring {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: linear-gradient(0deg, var(--accent-cyan), var(--accent-purple), var(--accent-magenta));
+  animation: rotateRing 4s linear infinite;
+  z-index: 1;
 }
 
-/* --- PROFILE IMAGE --- */
+.profile-img-container::after {
+  content: '';
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  right: 4px;
+  bottom: 4px;
+  background: var(--bg-obsidian);
+  border-radius: 50%;
+  z-index: 2;
+}
+
 .hero .profile-img {
-    width: 180px !important;
-    height: 180px !important;
-    border-radius: 50% !important;
-    border: 4px solid rgba(255, 255, 255, 0.4);
-    object-fit: cover;
-    animation: float 3s ease-in-out infinite;
-    box-shadow: 0 0 30px rgba(255, 255, 255, 0.15);
+  width: 176px;
+  height: 176px;
+  border-radius: 50%;
+  object-fit: cover;
+  z-index: 3;
+  transition: var(--transition-smooth);
 }
 
-/* --- FLOATING ANIMATION --- */
-@keyframes float {
-    0% {
-        transform: translateY(0);
-    }
-
-    50% {
-        transform: translateY(-10px);
-    }
-
-    100% {
-        transform: translateY(0);
-    }
+.profile-img-container:hover .profile-img {
+  transform: scale(1.05);
 }
 
-/* --- TEXT ANIMATED COLOR --- */
-.hero h1,
-.hero h2 {
-    background: linear-gradient(270deg, #00ffff, #ffff00, #146775);
-    background-size: 600% 600%;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: textGradient 6s ease infinite;
+@keyframes rotateRing {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
-@keyframes textGradient {
-    0% {
-        background-position: 0% 50%;
-    }
-
-    50% {
-        background-position: 100% 50%;
-    }
-
-    100% {
-        background-position: 0% 50%;
-    }
+/* --- HEADLINE & TYPING TEXT --- */
+.highlight-gradient {
+  background: linear-gradient(90deg, var(--accent-cyan), var(--accent-blue));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 800;
 }
 
-/* --- BUTTONS --- */
-.hero .btn-box button {
-    background: transparent !important;
-    border: 2px solid #00ffff !important;
-    color: #fff !important;
-    padding: 10px 25px !important;
-    margin: 10px;
-    border-radius: 30px;
-    font-size: 1rem !important;
-    font-weight: 500 !important;
-    letter-spacing: 1px;
-    transition: all 0.3s ease;
-    position: relative;
-    z-index: 3;
+.role-text {
+  font-size: 1.75rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  min-height: 40px;
 }
 
-.hero .btn-box button:hover {
-    background: linear-gradient(90deg, #00ffff, #ff00ff) !important;
-    box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
-    color: #000 !important;
-    transform: translateY(-3px);
+.typed-text {
+  color: var(--accent-cyan);
+  font-weight: 600;
+}
+
+.cursor {
+  color: var(--accent-purple);
+  animation: blink 0.8s infinite;
+  margin-left: 4px;
+  font-weight: 300;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.hero-pitch {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  max-width: 650px;
+}
+
+/* --- SOCIAL QUICK LINKS --- */
+.social-quicklinks {
+  margin-top: 1.5rem;
+}
+
+.social-icon-btn {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-glass);
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: var(--transition-smooth);
+}
+
+.social-icon-btn:hover {
+  color: var(--accent-cyan);
+  background: rgba(0, 242, 254, 0.05);
+  border-color: var(--accent-cyan);
+  transform: translateY(-3px);
+  box-shadow: 0 0 15px rgba(0, 242, 254, 0.2);
+}
+
+/* --- FUTURISTIC GLOW BUTTONS --- */
+.btn-primary-glow {
+  background: linear-gradient(90deg, var(--accent-cyan), var(--accent-blue));
+  color: #030014;
+  border: none;
+  padding: 12px 30px;
+  border-radius: 30px;
+  font-weight: 600;
+  font-size: 1rem;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  transition: var(--transition-smooth);
+  box-shadow: 0 0 15px rgba(0, 242, 254, 0.3);
+}
+
+.btn-primary-glow:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 25px rgba(0, 242, 254, 0.6);
+}
+
+.btn-primary-glow:hover .arrow-icon {
+  transform: translateX(4px);
+}
+
+.arrow-icon {
+  transition: transform 0.3s ease;
+}
+
+.btn-secondary-glow {
+  background: transparent;
+  color: var(--text-primary);
+  border: 1px solid var(--border-glass);
+  padding: 12px 30px;
+  border-radius: 30px;
+  font-weight: 500;
+  font-size: 1rem;
+  letter-spacing: 0.5px;
+  transition: var(--transition-smooth);
+}
+
+.btn-secondary-glow:hover {
+  border-color: var(--accent-purple);
+  background: rgba(157, 78, 221, 0.05);
+  transform: translateY(-3px);
+  box-shadow: 0 0 15px rgba(157, 78, 221, 0.3);
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: 2.75rem !important;
+  }
+  
+  .role-text {
+    font-size: 1.3rem;
+  }
+  
+  .hero-pitch {
+    font-size: 0.95rem;
+  }
 }
